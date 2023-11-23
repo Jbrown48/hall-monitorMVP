@@ -66,6 +66,34 @@ def check_pass():
         conn.close()
 
     return redirect(url_for('index'))
+# ... (existing code)
+
+@app.route('/remove_pass/<int:item_id>', methods=['POST'])
+def remove_pass(item_id):
+    # Remove the hall pass from the "Using Hall Pass Now" list
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM using_hall_pass WHERE id=?", (item_id,))
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('index'))
+
+# ... (existing code)
+# ... (existing code)
+
+@app.route('/clear_data', methods=['POST'])
+def clear_data():
+    # Clear data from the "Using Hall Pass Now" list
+    conn = sqlite3.connect(DATABASE)
+    cursor = conn.cursor()
+    cursor.execute("DELETE FROM using_hall_pass")
+    conn.commit()
+    conn.close()
+
+    return redirect(url_for('index'))
+
+# ... (existing code)
 
 if __name__ == '__main__':
     app.run(debug=True)

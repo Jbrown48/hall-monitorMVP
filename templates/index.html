@@ -2,37 +2,48 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-            <title>Your Web App</title>
-            </head>
-            <body>
-                <h1>Hall Monitor</h1>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Web App</title>
+</head>
+<body>
+    <h1>Hall Monitor</h1>
 
-                    <h2>Using Hall Pass Now</h2>
-                        <ul>
-                                {% for item in using_hall_pass %}
-                                            <li>{{ item[1] }}</li>
-                                                    {% endfor %}
-                                                        </ul>
+    <h2>Using Hall Pass Now</h2>
+    <ul>
+        {% for item in using_hall_pass %}
+            <li>
+                {{ item[1] }}
+                <form method="post" action="/remove_pass/{{ item[0] }}" style="display:inline;">
+                    <button type="submit">Remove</button>
+                </form>
+            </li>
+        {% endfor %}
+    </ul>
 
-                                                            <h2>Hall Passes Out: {{ hall_pass_count }}</h2>
+    <h2>Hall Passes Out: {{ hall_pass_count }}</h2>
 
-                                                                <h2>Student#s</h2>
-                                                                    <ul>
-                                                                            {% for item in data %}
-                                                                                        <li>{{ item[1] }}</li>
-                                                                                                {% endfor %}
-                                                                                                    </ul>
-                                                                                                        <form method="post" action="/add">
-                                                                                                                <label for="new_data">Add Student#:</label>
-                                                                                                                        <input type="text" id="new_data" name="new_data" required>
-                                                                                                                                <button type="submit">Submit</button>
-                                                                                                                                    </form>
+    <h2>All Student#s</h2>
+    <ul>
+        {% for item in data %}
+            <li>{{ item[1] }}</li>
+        {% endfor %}
+    </ul>
 
-                                                                                                                                        <form method="post" action="/check_pass">
-                                                                                                                                                <label for="check_pass">Check Hall Pass:</label>
-                                                                                                                                                        <input type="number" id="check_pass" name="check_pass" required>
-                                                                                                                                                                <button type="submit">Check</button>
-                                                                                                                                                                    </form>
-                                                                                                                                                                    </body>
-                                                                                                                                                                    </htmtu
+    <form method="post" action="/add">
+        <label for="new_data">Add Student:</label>
+        <input type="text" id="new_data" name="new_data" required>
+        <button type="submit">Submit</button>
+    </form>
+
+    <form method="post" action="/check_pass">
+        <label for="check_pass">Check Hall Pass:</label>
+        <input type="number" id="check_pass" name="check_pass" required>
+        <button type="submit">Check</button>
+    </form>
+
+    <!-- Add this form to your index.html file -->
+    <form method="post" action="/clear_data">
+        <button type="submit">Clear All Passes</button>
+    </form>
+</body>
+</html>
