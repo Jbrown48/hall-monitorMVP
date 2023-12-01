@@ -7,7 +7,9 @@
 </head>
 <body>
     <h1>Hall Monitor</h1>
-
+    <hr>
+    <h2>Hall Passes Out: {{ hall_pass_count }}</h2>
+    <hr>
     <h2>Using Hall Pass Now</h2>
     <ul>
         {% for item in using_hall_pass %}
@@ -19,9 +21,7 @@
             </li>
         {% endfor %}
     </ul>
-
-    <h2>Hall Passes Out: {{ hall_pass_count }}</h2>
-
+    <hr>
     <h2>All Student#s</h2>
     <ul>
         {% for item in data %}
